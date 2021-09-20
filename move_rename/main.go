@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path"
@@ -10,25 +11,15 @@ import (
 	"time"
 )
 
-/*
-示例代码目录中存在此结构:
-	D:\go developer
-		1
-			sdadfsef_1.mp4
-		2
-			jtjttyrj_2.mp4
-		......
-想要用代码将所有mp4文件统一存放在根目录D:\go developer。且用它上级目录名(数字)命名新文件：
-	D:\go developer
-		1.mp4
-		2.mp4
-		......
-诸如"D:\go developer\1"的文件夹已没有文件，后续被清理。请看main函数实现此示例。
-*/
+func timeSince(start time.Time) {
+	fmt.Printf("operation is completed, it takes %v seconds.\n",
+		time.Since(start).Seconds())
+}
 
 func main() {
-	start := time.Now()
-	const opRoot = "D:/go developer"
+	const opRoot = "D:/go files"
+	defer cleanEmptyDir(opRoot)
+	defer timeSince(time.Now())
 	dirInfos, err := ioutil.ReadDir(opRoot)
 	if err != nil {
 		panic(err.Error())
@@ -56,9 +47,6 @@ func main() {
 		}
 	}
 	println("rename(move) successfully!")
-	cleanEmptyDir(opRoot)
-	println("empty folders was cleaned up successfully!")
-	println(time.Now().Sub(start).Seconds())
 }
 
 func cleanEmptyDir(root string) {
@@ -81,4 +69,5 @@ func cleanEmptyDir(root string) {
 			}
 		}
 	}
+	println("empty folders was cleaned up successfully!")
 }
