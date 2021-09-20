@@ -8,6 +8,8 @@ GoLearningDemo是有关Golang的基础示例教程。包含了许多基础有用
 #### 各个Demo文件夹说明
 
 - file_operation：文件操作，如何创建文件、读取文本、追加文本内容。
+- StructMethod 使用结构体方法(类对象)。
+- move_rename：批量重命名(移动)文件，获取文件信息，删除文件夹。
 
 
 #### 使用说明
